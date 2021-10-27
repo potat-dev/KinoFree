@@ -18,8 +18,23 @@ if (get_button("Детали") === undefined) {
     if (urls === []) { alert("Ссылка не найдена"); } else {
       window.open(url_replace(urls[0]), "_blank");
     }
-  }, 850);
+  }, 500);
 }
+
+// if (get_button("Детали") === undefined) {
+//   alert("Выберите фильм");
+// } else {
+//   get_button("Детали").click();
+
+//   while (has_urls() == 0) { };
+//   var urls = get_urls();
+
+//   if (urls.length == 0) {
+//     alert("Ссылка не найдена");
+//   } else {
+//     window.open(url_replace(urls[0]), "_blank");
+//   }
+// }
 
 
 function get_button(text) {
@@ -36,4 +51,10 @@ function get_urls() {
       if (document.links[i].href.includes("www.kinopoisk.ru/film/"))
         urls.push(document.links[i].href);
   return urls
+}
+
+function has_urls() {
+  for (var i = document.links.length; i-- > 0;)
+    if (document.links[i].href.includes("www.kinopoisk.ru/film/")) return 1;
+  return 0;
 }
