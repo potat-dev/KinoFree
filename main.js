@@ -1,12 +1,16 @@
-// - Алгоритм:
-// - ищем ссылку на фильм
-// - если нет ссылки:
-//     - нажимаем на кнопку детали
-// - снова ищем ссылку
-// - если не находим
-//     - просим пользователя выбрать фильм
-//     - пробуем снова через 5 сек
-//     - выводим уведомление если находим
+// const kp_reg = /https:\/\/www\.kinopoisk\.ru.*/g;
+// const kp_hd_reg = /https:\/\/hd\.kinopoisk\.ru.*/g;
+
+var url = window.location.toString()
+
+if (/https:\/\/www\.kinopoisk\.ru.*/g.test(url)) { // кинопоиск
+  console.log(url, "kinopoisk")
+} else if (/https:\/\/hd\.kinopoisk\.ru.*/g.test(url)) { // кинопоиск ХД
+  console.log(url, "kinopoisk hd")
+} else { // любой другой сайт
+  console.log(url, "unknown")
+}
+
 
 if (get_button("Детали") === undefined) {
   alert("Выберите фильм");
