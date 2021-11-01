@@ -4,42 +4,41 @@
 var url = window.location.toString()
 
 if (/https:\/\/www\.kinopoisk\.ru.*/g.test(url)) { // кинопоиск
-  console.log(url, "kinopoisk")
+  console.log(url, "kinopoisk");
+  kp_parse();
 } else if (/https:\/\/hd\.kinopoisk\.ru.*/g.test(url)) { // кинопоиск ХД
-  console.log(url, "kinopoisk hd")
+  console.log(url, "kinopoisk hd");
+  kphd_parse();
 } else { // любой другой сайт
   console.log(url, "unknown")
+  unknown_parse();
 }
 
+// different parse methods //
 
-if (get_button("Детали") === undefined) {
-  alert("Выберите фильм");
-} else {
-  get_button("Детали").click();
-  
-  setTimeout(function () {
-    var urls = get_urls();
-    if (urls === []) { alert("Ссылка не найдена"); } else {
-      window.open(url_replace(urls[0]), "_blank");
-    }
-  }, 500);
+function kp_parse() {
+  alert("Упс! эта часть кода еще не реализована :(");
 }
 
-// if (get_button("Детали") === undefined) {
-//   alert("Выберите фильм");
-// } else {
-//   get_button("Детали").click();
+function kphd_parse() {
+  if (get_button("Детали") === undefined) {
+    alert("Выберите фильм");
+  } else {
+    get_button("Детали").click();
+    setTimeout(function () {
+      var urls = get_urls();
+      if (urls === []) { alert("Ссылка не найдена"); } else {
+        window.open(url_replace(urls[0]), "_blank");
+      }
+    }, 500);
+  }
+}
 
-//   while (has_urls() == 0) { };
-//   var urls = get_urls();
+function unknown_parse() {
+  alert("[неизвестный сайт]: Упс! эта часть кода еще не реализована :(");
+}
 
-//   if (urls.length == 0) {
-//     alert("Ссылка не найдена");
-//   } else {
-//     window.open(url_replace(urls[0]), "_blank");
-//   }
-// }
-
+// useful functions //
 
 function get_button(text) {
   return Array.from(document.querySelectorAll('button')).find(e => e.textContent === text);
