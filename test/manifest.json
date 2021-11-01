@@ -10,6 +10,14 @@
     "declarativeContent",
     "tabs"
   ],
+  "commands": {
+    "run-foo": {
+      "suggested_key": {
+        "default": "Ctrl+Comma"
+      },
+      "description": "Test action"
+    }
+  },
   "host_permissions": [
     "https://www.kinopoisk.ru/film/*",
     "https://www.kinopoisk.ru/series/*",
