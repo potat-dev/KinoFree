@@ -6,6 +6,19 @@
   "background": {
     "service_worker": "background.js"
   },
+  "commands": {
+    "run-foo": {
+      "suggested_key": {
+        "default": "Ctrl+Comma"
+      },
+      "description": "Test action"
+    },
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+R"
+      }
+    }
+  },
   "permissions": [
     "activeTab",
     "scripting",
