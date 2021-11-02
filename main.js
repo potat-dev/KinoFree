@@ -36,7 +36,19 @@ function kp_parse() {
 
 function unknown_parse() {
   // alert("Упс! эта часть кода еще не реализована :(");
-  alert("Все доступные ссылки:\n\n" + get_urls().join('\n\n'))
+  // alert("Все доступные ссылки:\n\n" + get_urls().join('\n\n'))
+
+  let urls = get_urls();
+  let ids = [];
+  for (let i = 0; i < urls.length; ++i) {
+    let id = get_url_id(urls[i]);
+    if (ids.indexOf(id) == -1) {
+      ids.push(id);
+    }
+  }
+
+  // console.log(ids);
+  alert("Найденные фильмы: " + ids.join(", "));
 }
 
 // useful functions //
