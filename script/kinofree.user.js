@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         KinoFree
 // @namespace    kinofree
-// @version      0.2
+// @version      0.2.1
 // @description  Бесплатный доступ к фильмам и сериалам КиноПоиска
 // @author       DenCoder
 // @match        *://www.kinopoisk.ru/*/*

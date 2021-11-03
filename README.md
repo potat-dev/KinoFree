@@ -16,6 +16,8 @@
 Его можно запомнить как `Alt + русская К(инопоиск)`  
 Изменить хоткей можно на странице chrome://extensions/shortcuts
 
+Для установки скрипта Tampermonkey можно просто перейти по [ссылке](https://github.com/DenCoder618/KinoFree/raw/main/script/kinofree.user.js)
+
 ## Зависимости:
 
 Для бесплатного онлайн просмотра фильмов используется агрегатор [Yohoho](https://github.com/4h0y/4h0y.github.io) - [yohoho.cc](https://yohoho.cc/)
