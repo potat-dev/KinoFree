@@ -12,12 +12,12 @@ if (/https:\/\/www\.kinopoisk\.ru\/(film|series)\/(\d{1,9})\/.*/g.test(url)) {
 
 function kphd_parse() {
   if (get_button("Детали") === undefined) {
-    alert("Выберите фильм");
+    alert("Сначала выберите фильм");
   } else {
     get_button("Детали").click();
     setTimeout(function () {
       var urls = get_urls();
-      if (urls === []) { alert("Ссылка не найдена"); } else {
+      if (urls === []) { alert("Очень странно, но наши лучшие котики-сыщики не смогли найти ни одной поддерживаемой ссылки"); } else {
         window.open(url_replace(urls[0]), "_blank");
       }
     }, 500);
@@ -37,7 +37,12 @@ function unknown_parse() {
       ids.push(id);
     }
   }
-  alert("Найденные фильмы: " + ids.join(", "));
+
+  if (ids.length == 0) {
+    alert("Упс! Наши лучшие котики-сыщики не смогли найти ни одну поддерживаемую ссылку на этом сайте :(")
+  } else {
+    alert("Найденные фильмы: " + ids.join(", "));
+  }
 }
 
 // useful functions //
