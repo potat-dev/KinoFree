@@ -1,12 +1,16 @@
 // ==UserScript==
 // @name         KinoFree
 // @namespace    kinofree
-// @version      0.1
-// @description  
-// @author       DenCoder (orig: Kirlovon)
+// @version      0.2
+// @description  Бесплатный доступ к фильмам и сериалам КиноПоиска
+// @author       DenCoder
 // @match        *://www.kinopoisk.ru/*/*
 // @grant        none
 // ==/UserScript==
+
+// original name:    Kinopoisk-Watch
+// original author:  Kirlovon
+// original repo:    https://github.com/Kirlovon/Kinopoisk-Watch
 
 // Link to the viewer page
 const kinopoiskWatchLink = 'https://4h0y.gitlab.io/#';
@@ -26,32 +30,25 @@ const bannerImage = `
 </svg>
 `;
 
-/**
- * Get id, type & title of current movie.
- */
+// Get id, type & title of current movie
 function getMovieData() {
     const url = window.location.href;
     const splitted = url.split('/');
     const id = splitted[4];
     const type = splitted[3];
     const title = document.querySelector('meta[property="og:title"]')?.content;
-
     return { id, type, title };
 }
 
-/**
- * Open page with Kinopoisk Watch player.
- */
+// Open page with Kinopoisk Watch player
 function openPlayer(id) {
   window.open(kinopoiskWatchLink + id, '_blank').focus();
 }
 
-/**
- * Mount Kinopoisk Watch banner to the page.
- */
+// Mount Kinopoisk Watch banner to the page
 function mountBanner(id, title) {
     const banner = document.createElement('div');
-    banner.id = 'kinopoisk-watch';
+    banner.id = 'kinofree';
     banner.innerHTML = bannerImage;
     banner.style.width = '32px';
     banner.style.height = '128px';
@@ -73,9 +70,7 @@ function mountBanner(id, title) {
     document.body.appendChild(banner);
 }
 
-/**
- * Initialize script
- */
+// Initialize script
 function init() {
     const { id, type, title } = getMovieData();
     if (type === 'film' || type === 'series') mountBanner(id, title);
