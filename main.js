@@ -1,16 +1,10 @@
-// const kp_reg = /https:\/\/www\.kinopoisk\.ru.*/g;
-// const kp_hd_reg = /https:\/\/hd\.kinopoisk\.ru.*/g;
-
 var url = window.location.toString()
 
-if (/https:\/\/www\.kinopoisk\.ru.*/g.test(url)) { // кинопоиск
-  console.log(url, "kinopoisk");
+if (/https:\/\/www\.kinopoisk\.ru\/(film|series)\/(\d{1,9})\/.*/g.test(url)) {
   kp_parse();
-} else if (/https:\/\/hd\.kinopoisk\.ru.*/g.test(url)) { // кинопоиск ХД
-  console.log(url, "kinopoisk hd");
+} else if (/https:\/\/hd\.kinopoisk\.ru.*/g.test(url)) {
   kphd_parse();
-} else { // любой другой сайт
-  console.log(url, "unknown")
+} else {
   unknown_parse();
 }
 
@@ -35,9 +29,6 @@ function kp_parse() {
 }
 
 function unknown_parse() {
-  // alert("Упс! эта часть кода еще не реализована :(");
-  // alert("Все доступные ссылки:\n\n" + get_urls().join('\n\n'))
-
   let urls = get_urls();
   let ids = [];
   for (let i = 0; i < urls.length; ++i) {
@@ -46,15 +37,13 @@ function unknown_parse() {
       ids.push(id);
     }
   }
-
-  // console.log(ids);
   alert("Найденные фильмы: " + ids.join(", "));
 }
 
 // useful functions //
 
 function get_url_id(url) {
-  return url.match(/https:\/\/www\.kinopoisk\.ru\/(film|series)\/(\d{5,7})\/.*/)[2];
+  return url.match(/https:\/\/www\.kinopoisk\.ru\/(film|series)\/(\d{1,9})\/.*/)[2];
 }
 
 function get_button(text) {
