@@ -40,6 +40,8 @@ function unknown_parse() {
 
   if (ids.length == 0) {
     alert("Упс! Наши лучшие котики-сыщики не смогли найти ни одну поддерживаемую ссылку на этом сайте :(")
+  } else if (ids.length == 1) {
+    window.open('https://4h0y.gitlab.io/#' + ids[0]);
   } else {
     alert("Найденные фильмы: " + ids.join(", "));
   }
