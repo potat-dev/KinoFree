@@ -40,12 +40,12 @@ function getMovieData() {
     return { id, type, title };
 }
 
-// Open page with Kinopoisk Watch player
+// Open page with Yohoho player
 function openPlayer(id) {
   window.open(kinopoiskWatchLink + id, '_blank').focus();
 }
 
-// Mount Kinopoisk Watch banner to the page
+// Mount KinoFree banner to the page
 function mountBanner(id, title) {
     const banner = document.createElement('div');
     banner.id = 'kinofree';
