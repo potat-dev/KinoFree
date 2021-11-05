@@ -60,5 +60,5 @@ function init() {
 var url = window.location.toString()
 
 if (/https:\/\/www\.kinopoisk\.ru\/(film|series)\/(\d{1,9})\/.*/g.test(url)) {
-  init();
+  window.addEventListener('load', init);
 }
