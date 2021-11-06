@@ -57,8 +57,6 @@ function init() {
   if (type === 'film' || type === 'series') mountBanner(id, title);
 }
 
-var url = window.location.toString()
-
-if (/https:\/\/www\.kinopoisk\.ru\/(film|series)\/(\d{1,9})\/.*/g.test(url)) {
+if (/https:\/\/www\.kinopoisk\.ru\/(film|series)\/(\d{1,9})\/.*/g.test(window.location.toString())) {
   window.addEventListener('load', init);
 }
