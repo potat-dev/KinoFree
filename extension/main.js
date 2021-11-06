@@ -1,20 +1,21 @@
-var url = window.location.toString()
+function main() {
+  const kp_reg = /https:\/\/www\.kinopoisk\.ru\/(film|series)\/(\d{1,9})\/.*/g
+  const kphd_reg = /https:\/\/hd\.kinopoisk\.ru.*/g
 
-if (/https:\/\/www\.kinopoisk\.ru\/(film|series)\/(\d{1,9})\/.*/g.test(url)) {
-  kp_parse();
-} else if (/https:\/\/hd\.kinopoisk\.ru.*/g.test(url)) {
-  kphd_parse();
-} else {
-  unknown_parse();
+  var url = window.location.toString()
+  if (kp_reg.test(url)) { kp_parse() }
+  else if (kphd_reg.test(url)) { kphd_parse() }
+  else unknown_parse();
 }
 
-// different parse methods //
+main();
 
-function kphd_parse() {
-  if (get_button("Детали") === undefined) {
-    alert("Сначала выберите фильм");
-  } else {
-    get_button("Детали").click();
+// - разные методы парсинга - //
+
+function kphd_parse() { // парсим кинопоиск хд
+  if (get_button("Детали") === undefined) { alert("Сначала выберите фильм") }
+  else {
+    get_button("Детали").click(); // программно кликаем на кнопку
     setTimeout(function () {
       var urls = get_urls();
       if (urls === []) { alert("Очень странно, но наши лучшие котики-сыщики не смогли найти ни одной поддерживаемой ссылки"); } else {
@@ -24,11 +25,11 @@ function kphd_parse() {
   }
 }
 
-function kp_parse() {
+function kp_parse() { // парсим обычный кинопоиск
   window.open('https://4h0y.gitlab.io/#' + get_url_id(window.location.toString()), "_blank");
 }
 
-async function unknown_parse() {
+async function unknown_parse() { // неизвестная страница
   let urls = get_urls();
   let ids = [];
   for (let i = 0; i < urls.length; ++i) {
@@ -36,13 +37,13 @@ async function unknown_parse() {
     if (ids.indexOf(id) == -1) ids.push(id);
   }
   ids.reverse();
-  
+
   if (ids.length == 0) {
     alert("Упс! Наши лучшие котики-сыщики не смогли найти ни одну поддерживаемую ссылку на этом сайте :(")
-  
+
   } else if (ids.length == 1) {
     window.open('https://4h0y.gitlab.io/#' + ids[0]);
-  
+
   } else {
     document.body.style.cursor = 'wait'; // меняем курсор на лоадинг
     let names = await get_names(ids);
@@ -51,7 +52,7 @@ async function unknown_parse() {
   }
 }
 
-// useful functions //
+// - полезные функции - //
 
 async function get_names(ids) {
   const timer = ms => new Promise(res => setTimeout(res, ms))
@@ -66,7 +67,8 @@ async function get_names(ids) {
   return output;
 }
 
-async function get_film_data(id) { //- получаем информацию о фильме -//
+// - получаем информацию о фильме - //
+async function get_film_data(id) {
   var output;
   await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/' + id, {
     method: 'GET',
@@ -76,20 +78,20 @@ async function get_film_data(id) { //- получаем информацию о 
       'Content-Type': 'application/json',
     },
   }).then(res => res.json())
-  .then(json => output = json).catch(err => console.log(err));
+    .then(json => output = json).catch(err => console.log(err));
   return output;
 }
 
 function get_urls() { //- получаем все ссылки на странице -//
   var urls = [];
-    for (var i = document.links.length; i--> 0;)
-      if (document.links[i].href.startsWith("https://www.kinopoisk.ru/film/") || document.links[i].href.startsWith("https://www.kinopoisk.ru/series/"))
-        urls.push(document.links[i].href);
+  for (var i = document.links.length; i-- > 0;)
+    if (document.links[i].href.startsWith("https://www.kinopoisk.ru/film/") || document.links[i].href.startsWith("https://www.kinopoisk.ru/series/"))
+      urls.push(document.links[i].href);
   return urls
 }
 
 function has_urls() {
-  for (var i = document.links.length; i--> 0;)
+  for (var i = document.links.length; i-- > 0;)
     if (document.links[i].href.startsWith("https://www.kinopoisk.ru/film/") || document.links[i].href.startsWith("https://www.kinopoisk.ru/series/")) return 1;
   return 0;
 }
