@@ -33,19 +33,21 @@ async function unknown_parse() {
   let ids = [];
   for (let i = 0; i < urls.length; ++i) {
     let id = get_url_id(urls[i]);
-    if (ids.indexOf(id) == -1) {
-      ids.push(id);
-    }
+    if (ids.indexOf(id) == -1) ids.push(id);
   }
-  // нужно реверснуть массив [::-1]
-
+  ids.reverse();
+  
   if (ids.length == 0) {
     alert("Упс! Наши лучшие котики-сыщики не смогли найти ни одну поддерживаемую ссылку на этом сайте :(")
+  
   } else if (ids.length == 1) {
     window.open('https://4h0y.gitlab.io/#' + ids[0]);
+  
   } else {
+    document.body.style.cursor = 'wait'; // меняем курсор на лоадинг
     let names = await get_names(ids);
     alert("Найденные фильмы: " + names.join(", "));
+    document.body.style.cursor = 'default'; // возвращаем обычный курсор
   }
 }
 
@@ -57,10 +59,9 @@ async function get_names(ids) {
   var data;
   const output = [];
   for (var i = 0; i < ids.length; i++) {
-    await timer(50);
+    await timer(50); // - 20 requests/sec
     data = await get_film_data(ids[i])
     output.push(data.nameRu);
-    // console.log(data);
   }
   return output;
 }
@@ -70,6 +71,7 @@ async function get_film_data(id) { //- получаем информацию о 
   await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/' + id, {
     method: 'GET',
     headers: {
+      // if you are reading this please change this key to avoid limit overuse
       'X-API-KEY': '72511645-7690-43f7-a959-0308d26defa5',
       'Content-Type': 'application/json',
     },
