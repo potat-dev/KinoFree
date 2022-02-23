@@ -1,4 +1,4 @@
-# KinoFree Extension
+# KinoFree Extension ![CodeQL](https://github.com/CyberPotat42/KinoFree/actions/workflows/codeql-analysis.yml/badge.svg) ![GitHub manifest version (path)](https://img.shields.io/github/manifest-json/v/CyberPotat42/KinoFree?color=blue&filename=extension%2Fmanifest.json)
 
 ## Что это такое?
 
